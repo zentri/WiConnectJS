@@ -68,12 +68,15 @@ versionRequest.done(function(resp) {
 });
 
 <span>//setup failure function for when HTTP error received</span>
-versionRequest.fail(function(resp) {
+versionRequest.fail(function(err, resp) {
   console.log('fail!');
-  console.log('error:', resp);
+  console.log('error:', err);
 });
 
 </pre>
+    <h4>Set request timeout</h4>
+    <p>A <code>timeout</code> argument can be specified for commands to invoke a timeout error on the request after the specified number of milliseconds.</p>
+    <p>example: <pre><span>//set an extremely small timeout period of 5milliseconds to ensure timeout error occurs</span><br>device.ver({timeout: 5}).fail(function(){console.log('no response after 5 milliseconds')});</pre></p>
     <h4>Abort command request</h4>
     <h5><code>.abort()</code> immediately abort request</h5>
     <p>example: <pre>var versionRequest = device.ver();<br><br><span>//lets not wait for the response and abort the request immediately</span><br>versionRequest.abort();</pre></p>
