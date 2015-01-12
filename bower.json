@@ -1,0 +1,19 @@
+{
+  "name": "wiconnectjs",
+  "version": "0.1.0",
+  "authors": [
+    "Andrew Mitchell <andrew.mitchell@ack.me>"
+  ],
+  "description": "Interface with WiConnect Hardware",
+  "main": "main.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "superagent": "~0.21.0"
+  }
+}

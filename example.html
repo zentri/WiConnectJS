@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <script type="text/javascript" src="bower_components/superagent/superagent.js"></script>
+    <script type="text/javascript" src="lib/main.js"></script>
+    <style>
+      body {
+        font-family: monospace;
+      }
+      h5 {
+        font-weight: 400;
+      }
+      pre, code {
+        background: #eee;
+        border: 1px solid #ccc;
+        padding: 4px;
+        line-height: 12pt;
+        border-radius: 2px;
+      }
+      span {
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Setup</h3>
+    <p>In a terminal navigate to the WiConnectJS directory and run:</p>
+    <pre>bower install</pre>
+    <h3>Configure WiConnect Device</h3>
+      <pre>nup -s
+set wl o e 1
+set ht s e 1
+set ht s c *
+save
+reboot</pre>
+    <p>Note the device IP address</p>
+    <h3>Using WiConnectJS API</h3>
+    <p>Open Developer Tools - F12<br> Open Console </p>
+    <h4>Instantiating a device</h4>
+    <pre>var device = new WiConnectDevice({host: 'http://[deviceIP]' <span>[, auth: {user: 'username', pass: 'password'}]</span>});</pre>
+    <p>example: <pre>var device = new WiConnectDevice({host: 'http://12.34.56.78'});</pre></p>
+    <h4>Issue command to device</h4>
+    <pre>device.[command](<span>['command_arguments']</span>);</pre>
+    <p>example: <pre>device.ver();<br>device.ls();<br>device.ls('-v');</pre></p>
+    <p>An XMLHttpRequest object will be returned each time a command is issued to a device and can be stored for later use.</p>
+    <p>example: <pre>var versionRequest = device.ver();</pre></p>
+    <h4>Issue command to device defining callback function</h4>
+    <pre>device.[command](<span>['command_arguments' [, callback(error, response){}]|[callback(error, response){}]]</span>);</pre>
+    <p>example: <pre>device.ver(function(err, resp){ console.log(resp); });<br>device.ls(function(err, resp){ console.log(resp); });<br>device.ls('-v', function(err, resp){ console.log(resp); });<br>device.reboot();</pre></p>
+    <p>The response from the first three commands will be logged to the javascript console once each command has completed. </p>
+    <h4>Issue command to device using promise return functions</h4>
+    <pre>device.[command](<span>['command_arguments']</span>)<span>[.done(function(response){})][.fail( function(response){})][.always( function(response){})]</span>;</pre>
+    <h5><code>.done(<span>function(response){}</span>)</code> function to run when command returns with a successful response</h5>
+    <h5><code>.fail(<span>function(response){}</span>)</code> function to run when command returns with a failure response</h5>
+    <h5><code>.always(<span>function(response){}</span>)</code> function to run when command response completes no matter whether success or failure</h5>
+    <p>example: <pre>var versionRequest = device.ver();
+
+<span>//setup function to always log to console no matter whether failure or success</span>
+versionRequest.always(function(resp) {
+  console.log('request complete.');
+});
+
+<span>//setup success function for when response received</span>
+versionRequest.done(function(resp) {
+  console.log('success!');
+  console.log('response: ', resp);
+  console.log('WiConnect Version:', resp.response);
+});
+
+<span>//setup failure function for when HTTP error received</span>
+versionRequest.fail(function(resp) {
+  console.log('fail!');
+  console.log('error:', resp);
+});
+
+</pre>
+    <h4>Abort command request</h4>
+    <h5><code>.abort()</code> immediately abort request</h5>
+    <p>example: <pre>var versionRequest = device.ver();<br><br><span>//lets not wait for the response and abort the request immediately</span><br>versionRequest.abort();</pre></p>
+  </body>
+</html>
