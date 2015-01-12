@@ -1,0 +1,16 @@
+{
+  "name": "WiConnectJS",
+  "description": "Interface with WiConnect Hardware",
+  "version": "0.1.0",
+  "author": {
+    "name": "Andrew Mitchell",
+    "email": "andrew.mitchell@ack.me"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "superagent": "^0.21.0"
+  }
+}
