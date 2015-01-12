@@ -40,16 +40,16 @@ reboot</pre>
     <pre>var device = new WiConnectDevice({host: 'http://[deviceIP]' <span>[, auth: {user: 'username', pass: 'password'}]</span>});</pre>
     <p>example: <pre>var device = new WiConnectDevice({host: 'http://12.34.56.78'});</pre></p>
     <h4>Issue command to device</h4>
-    <pre>device.[command](<span>['command_arguments']</span>);</pre>
-    <p>example: <pre>device.ver();<br>device.ls();<br>device.ls('-v');</pre></p>
+    <pre>device.[command](<span>[{args: 'command_arguments' [, flags: 0]}]</span>);</pre>
+    <p>example: <pre>device.ver();<br>device.ls();<br>device.ls({args: '-v'});</pre></p>
     <p>An XMLHttpRequest object will be returned each time a command is issued to a device and can be stored for later use.</p>
     <p>example: <pre>var versionRequest = device.ver();</pre></p>
     <h4>Issue command to device defining callback function</h4>
-    <pre>device.[command](<span>['command_arguments' [, callback(error, response){}]|[callback(error, response){}]]</span>);</pre>
-    <p>example: <pre>device.ver(function(err, resp){ console.log(resp); });<br>device.ls(function(err, resp){ console.log(resp); });<br>device.ls('-v', function(err, resp){ console.log(resp); });<br>device.reboot();</pre></p>
+    <pre>device.[command](<span>[{args: 'command_arguments' [, flags: 0]} [, callback(error, response){}]|[callback(error, response){}]]</span>);</pre>
+    <p>example: <pre>device.ver(function(err, resp){ console.log(resp); });<br>device.ls(function(err, resp){ console.log(resp); });<br>device.ls({args: '-v'}, function(err, resp){ console.log(resp); });<br>device.reboot();</pre></p>
     <p>The response from the first three commands will be logged to the javascript console once each command has completed. </p>
     <h4>Issue command to device using promise return functions</h4>
-    <pre>device.[command](<span>['command_arguments']</span>)<span>[.done(function(response){})][.fail( function(response){})][.always( function(response){})]</span>;</pre>
+    <pre>device.[command](<span>[{args: 'command_arguments' [, flags: 0]}]</span>)<span>[.done(function(response){})][.fail( function(response){})][.always( function(response){})]</span>;</pre>
     <h5><code>.done(<span>function(response){}</span>)</code> function to run when command returns with a successful response</h5>
     <h5><code>.fail(<span>function(response){}</span>)</code> function to run when command returns with a failure response</h5>
     <h5><code>.always(<span>function(response){}</span>)</code> function to run when command response completes no matter whether success or failure</h5>
