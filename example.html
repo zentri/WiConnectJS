@@ -83,5 +83,47 @@ versionRequest.fail(function(err, resp) {
     <h4>Abort command request</h4>
     <h5><code>.abort()</code> immediately abort request</h5>
     <p>example: <pre>var versionRequest = device.ver();<br><br><span>//lets not wait for the response and abort the request immediately</span><br>versionRequest.abort();</pre></p>
+    <h3>Using WebSockets</h3>
+    <h4>Connect to a device</h4>
+    <pre>var ws = new WebSocket('ws://[deviceIP]/stream');</pre>
+    <p>example:</p>
+    <pre>var ws = new WebSocket('ws://12.34.56.78/stream');</pre>
+    <h4>WebSocket methods</h4>
+    <h5><code>.onopen</code> handle for WebSocket open event </h5>
+    <h5><code>.onmessage</code> handler for WebSocket message received event </h5>
+    <h5><code>.onclose</code> handler for WebSocket close event </h5>
+    <h5><code>.send(<span>[message_data]</span>)</code> Send a WebSocket message to the device </h5>
+    <h5><code>.close()</code> Initiate WebSocket close handshake </h5>
+    <p>example:</p>
+    <pre>var ws = new WebSocket('ws://12.34.56.78/stream');
+
+<span>// log a message once WebSocket connection handshake is complete</span>
+ws.onopen = function() {
+  console.log('WebSocket open to WiConnect device!');
+};
+
+<span>// log a message to the console to inform when WiConnect closes the websocket connection</span>
+ws.onclose = function() {
+  console.log('WebSocket has been closed!');
+};
+
+<span>// log the message binary blob data to the console when we receive a WebSocket message</span>
+ws.onmessage = function(event) {
+  var reader;
+  if(event.data instanceof Blob) {
+    reader = new FileReader();
+    reader.onload = function() {
+      return console.log(reader.result);
+    };
+    return reader.readAsText(event.data);
+  }
+}
+
+<span>// send a WebSocket message to the WiConnect device</span>
+ws.send('I am a teapot.');
+
+<span>// close the WebSocket connection</span>
+ws.close();
+</pre>
   </body>
 </html>
