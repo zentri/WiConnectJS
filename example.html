@@ -45,7 +45,7 @@ reboot</pre>
     <h4>Issue command to device</h4>
     <pre>device.[command](<span>[{args: 'command_arguments' [, flags: 0]}]</span>);</pre>
     <p>example: <pre>device.ver();<br>device.ls();<br>device.ls({args: '-v'});</pre></p>
-    <p>An XMLHttpRequest object will be returned each time a command is issued to a device and can be stored for later use.</p>
+    <p>An object will be returned each time a command is issued to a device and can be stored for later use.</p>
     <p>example: <pre>var versionRequest = device.ver();</pre></p>
     <h4>Issue command to device defining callback function</h4>
     <pre>device.[command](<span>[{args: 'command_arguments' [, flags: 0]} [, callback(error, response){}]|[callback(error, response){}]]</span>);</pre>
