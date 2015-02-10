@@ -1,6 +1,6 @@
 {
   "name": "wiconnectjs",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "authors": [
     "Andrew Mitchell <andrew.mitchell@ack.me>"
   ],
@@ -10,7 +10,6 @@
   },
   "description": "Interface with WiConnect Hardware",
   "main": "main.js",
-  "license": "MIT",
   "private": false,
   "ignore": [
     "**/.*",
