@@ -11,7 +11,7 @@
   "description": "Interface with WiConnect Hardware",
   "main": "main.js",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
