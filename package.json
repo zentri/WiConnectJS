@@ -1,7 +1,7 @@
 {
   "name": "WiConnectJS",
   "description": "Interface with WiConnect Hardware",
-  "version": "0.1.0",
+  "version": "1.0.2",
   "author": {
     "name": "Andrew Mitchell",
     "email": "andrew.mitchell@ack.me"
