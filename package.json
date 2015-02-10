@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:ackme/WiConnectJS.git"
   },
   "dependencies": {
     "superagent": "^0.21.0"

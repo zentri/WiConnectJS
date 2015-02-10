@@ -1,9 +1,13 @@
 {
   "name": "wiconnectjs",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "authors": [
     "Andrew Mitchell <andrew.mitchell@ack.me>"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ackme/WiConnectJS.git"
+  },
   "description": "Interface with WiConnect Hardware",
   "main": "main.js",
   "license": "MIT",
