@@ -181,9 +181,19 @@ var myAlwaysFunction = function(err, res){
 };
 
 //issue commands to device with promise functions in command arguments object
-device.ls({done: myDoneFunction, fail: myFailFunction, always: myAlwaysFunction});
+device.ls({
+  done: myDoneFunction,
+  fail: myFailFunction,
+  always: myAlwaysFunction
+});
 
-device.scan({args: '-v', retries: 3, done: myDoneFunction, fail: myFailFunction, always: myAlwaysFunction});
+device.scan({
+  args: '-v',
+  retries: 3,
+  done: myDoneFunction,
+  fail: myFailFunction,
+  always: myAlwaysFunction
+});
 
 ```
 
