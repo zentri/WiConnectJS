@@ -90,17 +90,17 @@ device.ls();
 device.ls({args: '-v'});
 ```
 
-example:
-```javascript
-var versionRequest = device.ver();
-```
-
 A WiConnect command request object will be returned each time a command is issued to a device, and can be stored for later use, with the following methods:
 
 * `done()` - set promise function to be executed when a successful response is received (see below)
 * `fail()` - set promise function to be executed when a request fails (see below)
 * `always()` - set promise function to be exectuted on completion of a command request (see below)
 * `abort()` - abort the command request immediately
+
+example:
+```javascript
+var versionRequest = device.ver();
+```
 
 To process the WiConnect command response, you need to either set a callback function, or set promise functions for parsing the response from the command request.
 
