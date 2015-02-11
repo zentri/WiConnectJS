@@ -234,7 +234,7 @@ versionRequest.abort();
 ```
 # Using WebSockets
 
-###Connect to a device
+### Connect to a device
 ```javascript
 var ws = new WebSocket('ws://[deviceIP]/stream');
 ```
@@ -242,7 +242,7 @@ example:
 ```javascript
 var ws = new WebSocket('ws://12.34.56.78/stream');
 ```
-###WebSocket methods
+### WebSocket methods
 
 `.onopen` handle for WebSocket open event
 
