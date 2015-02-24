@@ -6,6 +6,7 @@
     "name": "Andrew Mitchell",
     "email": "andrew.mitchell@ack.me"
   },
+  "main": "./lib/main",
   "repository": {
     "type": "git",
     "url": "git@github.com:ackme/WiConnectJS.git"
