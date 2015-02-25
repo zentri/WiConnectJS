@@ -235,7 +235,7 @@ versionRequest.abort();
 
 # Writing files
 
-###`file_create` or `fcr`
+### `file_create` or `fcr`
 
 The `file_create`  command accepts two additional arguments `filename` and `data`  for writing a file to the WiConnect device. The `data` argument is expected to be of type [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer).
 
@@ -270,7 +270,7 @@ The WiConnectJS API is able to manage files of any size.
 
 The WiConnect HTTP server has a maximum request size limit of 4KB per request. WiConnectJS handles this limit for you by calculating the file CRC, creating a new file and requesting an open stream handle, then writing file chunks to the open file stream. If you are inspecting network requests while using `file_create` you will see multiple requests being sent to the WiConnect Device.
 
-###`stream_write` or `write`
+### `stream_write` or `write`
 
 The `stream_write` command accepts the additional argument `data`  for writing a data to an open stream on the WiConnect device. The `data` argument is expected to be of type [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer).
 
