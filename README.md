@@ -232,6 +232,78 @@ var versionRequest = device.ver();
 //lets not wait for the response and abort the request immediately
 versionRequest.abort();
 ```
+
+# Writing files
+
+###`file_create` or `fcr`
+
+The `file_create`  command accepts two additional arguments `filename` and `data`  for writing a file to the WiConnect device. The `data` argument is expected to be of type [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer).
+
+example:
+```javascript
+// http://updates.html5rocks.com/2012/06/How-to-convert-ArrayBuffer-to-and-from-String
+var stringToArrayBuffer = function(str){
+  var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+  var bufView = new Uint16Array(buf);
+  for (var i=0, strLen=str.length; i < strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
+};
+
+var fileData = stringToArrayBuffer("Hello World!");
+
+// create file on WiConnect device
+device.file_create({filename: 'testFile.txt', data: fileData}, function(err, res){
+  if(err) {
+    // error creating file
+    console.log('Error writing testFile.txt');
+    return;
+  }
+
+  // file created successfully
+  console.log('testFile.txt created successfully on WiConnect device');
+});
+```
+
+The WiConnectJS API is able to manage files of any size.
+
+The WiConnect HTTP server has a maximum request size limit of 4KB per request. WiConnectJS handles this limit for you by calculating the file CRC, creating a new file and requesting an open stream handle, then writing file chunks to the open file stream. If you are inspecting network requests while using `file_create` you will see multiple requests being sent to the WiConnect Device.
+
+###`stream_write` or `write`
+
+The `stream_write` command accepts the additional argument `data`  for writing a data to an open stream on the WiConnect device. The `data` argument is expected to be of type [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer).
+
+example:
+```javascript
+// ID of open stream on WiConnect device
+var stream_id = 0;
+
+// data to write to stream
+// stringToArrayBuffer function from previous example
+var streamData = stringToArrayBuffer("hello");
+
+// write 0 5
+device.stream_write({
+    args: stream_id + " " + streamData.byteLength,
+    data: streamData
+  },
+  function(err, res){
+    if(err) {
+      // error writing to stream
+      console.log('Error writing to stream ' + stream_id);
+      return;
+    }
+
+    // data written successfully
+    console.log(streamData.byteLength + ' bytes of data written to stream ' + stream_id);
+
+  });
+```
+
+The WiConnectJS API is able to writing data of any size to open streams.
+
+The WiConnect HTTP server has a maximum request size limit of 4KB per request. WiConnectJS handles this limit by writing data chunks sequentially to the open file stream. If you are inspecting network requests while using `stream_write` you will see multiple requests being sent to the WiConnect Device.
 # Using WebSockets
 
 ### Connect to a device
