@@ -304,6 +304,44 @@ device.stream_write({
 The WiConnectJS API is able to writing data of any size to open streams.
 
 The WiConnect HTTP server has a maximum request size limit of 4KB per request. WiConnectJS handles this limit by writing data chunks sequentially to the open file stream. If you are inspecting network requests while using `stream_write` you will see multiple requests being sent to the WiConnect Device.
+
+# Reading files
+
+example:
+
+```javascript
+var streamID;
+
+device.file_open(
+  {args: 'testFile.txt'},
+  function(err, res){
+    if(err){
+      console.log('file could not be opened');
+      return;
+    }
+
+    // the open stream ID will be returned in response property of res
+    // remove new line characters from response
+    streamID = res.response.replace('\r\n', '');
+
+    // now we have the open stream id, read 5 bytes of data from it
+    var bytesToRead = 5;
+    device.read(
+      {args: streamID + ' ' + bytesToRead}, // read 0 5
+      function(err, res){
+      if(err){
+      console.log('Reading stream ' + streamID + ' failed');
+      return;
+      }
+
+    var bytesFromStream = res.response;
+
+    // output the bytes read
+    console.log(bytesToRead + ' bytes read: ' + bytesFromStream);
+      });
+  });
+```
+
 # Using WebSockets
 
 ### Connect to a device
