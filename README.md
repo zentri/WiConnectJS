@@ -334,10 +334,10 @@ device.file_open(
       return;
       }
 
-    var bytesFromStream = res.response;
+      var bytesFromStream = res.response;
 
-    // output the bytes read
-    console.log(bytesToRead + ' bytes read: ' + bytesFromStream);
+      // output the bytes read
+      console.log(bytesToRead + ' bytes read: ' + bytesFromStream);
       });
   });
 ```
