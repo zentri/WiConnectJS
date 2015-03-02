@@ -326,6 +326,7 @@ device.file_open(
 
     // now we have the open stream id, read 5 bytes of data from it
     var bytesToRead = 5;
+
     device.read(
       {args: streamID + ' ' + bytesToRead}, // read 0 5
       function(err, res){
