@@ -312,8 +312,7 @@ example:
 ```javascript
 var streamID;
 
-device.file_open(
-  {args: 'testFile.txt'},
+device.file_open({args: 'testFile.txt'},
   function(err, res){
     if(err){
       console.log('file could not be opened');
@@ -327,8 +326,7 @@ device.file_open(
     // now we have the open stream id, read 5 bytes of data from it
     var bytesToRead = 5;
 
-    device.read(
-      {args: streamID + ' ' + bytesToRead}, // read 0 5
+    device.read({args: streamID + ' ' + bytesToRead}, // read 0 5
       function(err, res){
       if(err){
       console.log('Reading stream ' + streamID + ' failed');
