@@ -367,19 +367,17 @@ example:
 ```javascript
 var ws = new WebSocket('ws://12.34.56.78/stream');
 
-// log a message once WebSocket connection handshake is complete
-ws.onopen = function() {
-  console.log('WebSocket open to WiConnect device!');
-};
-
-// log a message to the console to inform when WiConnect closes the websocket connection
+// function to execute once the websocket has been closed
 ws.onclose = function() {
+  // log a message to the console when the websocket is closed
   console.log('WebSocket has been closed!');
 };
 
-// log the message binary blob data to the console when we receive a WebSocket message
+// function to execute each time a message is received via the websocket
 ws.onmessage = function(event) {
   var reader;
+
+  // log the message binary blob data to the console when we receive a websocket message
   if(event.data instanceof Blob) {
     reader = new FileReader();
     reader.onload = function() {
@@ -389,11 +387,36 @@ ws.onmessage = function(event) {
   }
 }
 
-// send a WebSocket message to the WiConnect device
-ws.send('I am a teapot.');
+// function to execute when the socket has been opened successfully
+ws.onopen = function() {
+  // log a message once websocket connection handshake is complete
+  console.log('WebSocket open to WiConnect device!');
 
-// close the WebSocket connection
-ws.close();
+  // use 'list' command using a serial terminal, or using WiConnectJS
+  // open streams on the device will be displayed including a 'WEBS' stream
+  // indicating the open websocket
+  // e.g. using serial terminal
+  // > list
+  // ! # Type  Info
+  // # 0 WEBS  12.34.56.78:80 12.34.56.78:54460
+
+  // now that the websocket is connected, send a message to the WiConnect device
+  ws.send('I am a teapot.');
+
+  // using a serial terminal, or using WiConnectJS read the stream
+  // e.g. using serial terminal
+  // > read 0 14
+  // I am a teapot.
+
+  // close the websocket
+  ws.close();
+
+  // note: the websocket will not be immediately closed
+  // WiConnect will keep the websocket open until all stream data has been read
+  // e.g.
+  // > read 0 1
+  // > [2015-03-23 | 03:21:37: Closed: 0]
+};
 ```
 
 ## Licence
