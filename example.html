@@ -97,19 +97,17 @@ versionRequest.fail(function(err, resp) {
     <p>example:</p>
     <pre>var ws = new WebSocket('ws://12.34.56.78/stream');
 
-<span>// log a message once WebSocket connection handshake is complete</span>
-ws.onopen = function() {
-  console.log('WebSocket open to WiConnect device!');
-};
-
-<span>// log a message to the console to inform when WiConnect closes the websocket connection</span>
+<span>// function to execute once the websocket has been closed</span>
 ws.onclose = function() {
+  <span>// log a message to the console when the websocket is closed</span>
   console.log('WebSocket has been closed!');
 };
 
-<span>// log the message binary blob data to the console when we receive a WebSocket message</span>
+<span>// function to execute each time a message is received via the websocket</span>
 ws.onmessage = function(event) {
   var reader;
+
+  <span>// log the message binary blob data to the console when we receive a websocket message</span>
   if(event.data instanceof Blob) {
     reader = new FileReader();
     reader.onload = function() {
@@ -119,11 +117,36 @@ ws.onmessage = function(event) {
   }
 }
 
-<span>// send a WebSocket message to the WiConnect device</span>
-ws.send('I am a teapot.');
+<span>// function to execute when the socket has been opened successfully</span>
+ws.onopen = function() {
+  <span>// log a message once websocket connection handshake is complete</span>
+  console.log('WebSocket open to WiConnect device!');
 
-<span>// close the WebSocket connection</span>
-ws.close();
+  <span>// use 'list' command using a serial terminal, or using WiConnectJS
+  // open streams on the device will be displayed including a 'WEBS' stream
+  // indicating the open websocket
+  // e.g. using serial terminal
+  // > list
+  // ! # Type  Info
+  // # 0 WEBS  12.34.56.78:80 12.34.56.78:54460
+
+  // now that the websocket is connected, send a message to the WiConnect device</span>
+  ws.send('I am a teapot.');
+
+  <span>// using a serial terminal, or using WiConnectJS read the stream
+  // e.g. using serial terminal
+  // > read 0 14
+  // I am a teapot.</span>
+
+  <span>// close the websocket</span>
+  ws.close();
+
+  <span>// note: the websocket will not be immediately closed
+  // WiConnect will keep the websocket open until all stream data has been read
+  // e.g.
+  // > read 0 1
+  // > [2015-03-23 | 03:21:37: Closed: 0]</span>
+};
 </pre>
   </body>
 </html>
