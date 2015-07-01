@@ -77,6 +77,7 @@ The first argument of the ``device.cmd()`` method is an optional arguments objec
 * `flags` integer - [WiConnect HTTP flag](http://wiconnect.ack.me/2.1/networking_and_security#http_library) - default `0`
 * `timeout` integer - maximum amount of time to wait for response from the device - default `120000` (milliseconds)
 * `retries` integer - number of attempts to issue this command when a command request fails - default `1`
+* `acceptCommandFailed` boolean - optional flag to specify if an error should be returned when WiConnect response with `Command Failed\r\n` - default `true`
 
 example:
 ```javascript
